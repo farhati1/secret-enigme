@@ -53,8 +53,10 @@ class SendCredentialsViaSMS implements ShouldQueue
         $message .= "Code: {$user->code} \n";
         $message .= "Veuillez vous connecter à : https://example.com/login";
 
+
         // Créer une instance du client Twilio
         $client = new Client($sid, $token);
+
 
         // Envoyer le SMS
         $client->messages->create(
