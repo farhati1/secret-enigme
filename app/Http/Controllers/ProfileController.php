@@ -26,6 +26,13 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function final()
+    {
+        $user = Auth::user();
+        return Inertia::render('Final', [
+            'user' => $user
+        ]);
+    }
     /**
      * Update the user's profile information.
      */

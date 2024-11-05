@@ -38,7 +38,7 @@ function handleImageError() {
 }
 
 function checkAnswer() {
-    if (userResponse.value.toUpperCase() === props.user.reponse) {
+    if (userResponse.value.toUpperCase() === 'FARHATI') {
         isCorrect.value = true; // Réponse correcte
     } else {
         isCorrect.value = false; // Réponse incorrecte
@@ -67,12 +67,12 @@ function checkAnswer() {
                                 <h2
                                     class="text-xl font-semibold text-black dark:text-white text-center"
                                 >
-                                    Bienvenue  <span class="text-amber-500">{{user.name}}</span>
+                                    Dernière ligne droite <span class="text-amber-500">{{user.name}}</span>, vas tu trouver la réponse à cette devinette ?
 
                                 </h2>
 
-                                <p class="mt-4 text-sm/relaxed">
-                                    {{user.devinette}}
+                                <p  class="mt-4 text-sm/relaxed">
+                                    Félicitations ! Vous avez déchiffré chaque prénom et chaque indice. Mon nom porte en lui un immense bonheur. Qui suis-je ?
                                     <span class="text-center text-amber-900 font-italic"> (Veuillez écrire tout en minuscule)</span>
                                 </p>
                                 <div class="flex flex-col">
@@ -88,14 +88,19 @@ function checkAnswer() {
                                         Vérifier
                                     </button>
                                     <div class="mt-4 ">
-                                        <p v-if="isCorrect === true" class="text-green-500">Bravo ! C'est correct !</p>
-                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essayez encore !</p>
+                                        <p v-if="isCorrect === true" class="text-green-500">Bravo ! T'es smart Allahuma Baarik ! Mais bon c'était quand même assez facile e</p>
+                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essaye encore !</p>
                                     </div>
                                 </div>
 
 
                                 <div v-show="isCorrect" class="my-12 flex items-center justify-center mx-auto">
-                                    <Link href="/secret-final"  as="button" type="button" class="inline-flex items-center rounded-md border border-transparent bg-amber-500 hover:bg-amber-700 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900">PASSER À LA FINALE</Link>
+                                    <button v-on:click="show = !show">
+                                        <p v-if="!show">Appuie pour découvrir le secret</p>
+                                    </button>
+                                    <transition name="bounce">
+                                        <p v-if="show" class="lg:text-3xl font-bold text-sm text-amber-500 uppercase">Je vais me marier!!!!!!</p>
+                                    </transition>
 
                                 </div>
                             </div>
@@ -107,3 +112,23 @@ function checkAnswer() {
         </div>
     </div>
 </template>
+
+<style scoped>
+.bounce-enter-active {
+    animation: bounce-in 1s;
+}
+.bounce-leave-active {
+    animation: bounce-in 1s reverse;
+}
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>
