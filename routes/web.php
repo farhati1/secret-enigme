@@ -20,6 +20,7 @@ Route::get('/send', [SendSMSController::class, 'sendSMS()']) -> name('send.sms')
 
 Route::middleware('auth')->group(function () {
     Route::get('/secret', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/secret-demi-final', [ProfileController::class, 'demiFinal'])->name('profile.demiFinal');
     Route::get('/secret-final', [ProfileController::class, 'final'])->name('profile.final');
 });
 

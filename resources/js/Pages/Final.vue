@@ -27,8 +27,12 @@ const props = defineProps({
 });
 
 const show = ref(false);
+const showButton = ref(false);
 const userResponse = ref(''); // Réponse de l'utilisateur
 const isCorrect = ref(null); // Pour vérifier si la réponse est correcte
+const isInputDisabled = ref(false);
+const isButtonVisible = ref(true);
+
 
 function handleImageError() {
     document.getElementById('screenshot-container')?.classList.add('!hidden');
@@ -38,8 +42,10 @@ function handleImageError() {
 }
 
 function checkAnswer() {
-    if (userResponse.value.toUpperCase() === 'FARHATI') {
+    if (userResponse.value === '440') {
         isCorrect.value = true; // Réponse correcte
+        isInputDisabled.value = true;
+        isButtonVisible.value = false;
     } else {
         isCorrect.value = false; // Réponse incorrecte
     }
@@ -62,45 +68,71 @@ function checkAnswer() {
                         <div
                             class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800"
                         >
-                            <div class="pt-3 sm:pt-5">
+                            <div v-if="!show" class="pt-3 sm:pt-5">
 
                                 <h2
                                     class="text-xl font-semibold text-black dark:text-white text-center"
                                 >
-                                    Dernière ligne droite <span class="text-amber-500">{{user.name}}</span>, vas tu trouver la réponse à cette devinette ?
+                                    Dernier indice <span class="text-amber-500">{{user.name}}</span>, vas tu trouver la réponse à cette devinette ?
 
                                 </h2>
 
                                 <p  class="mt-4 text-sm/relaxed">
-                                    Félicitations ! Vous avez déchiffré chaque prénom et chaque indice. Mon nom porte en lui un immense bonheur. Qui suis-je ?
-                                    <span class="text-center text-amber-900 font-italic"> (Veuillez écrire tout en minuscule)</span>
+                                    Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez quatre chiffres pour former un code. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère ...
                                 </p>
-                                <div class="flex flex-col">
+
+                                <div  class="my-12 flex items-center justify-center mx-auto">
+                                    <button
+                                        v-on:click="show = !show"
+                                        class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded"
+                                    >
+                                       Suivant
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div v-if="show" class="pt-3 sm:pt-5">
+
+                                <h2
+                                    class="text-xl font-semibold text-black dark:text-white text-center"
+                                >
+                                    À  vous de jouer ! 🕵🏾‍♂️
+                                </h2>
+
+                                <p  class="mt-4 text-sm/relaxed">
+                                    Je suis souvent là quand vous êtes assis pour apprendre, parfois ignorée mais toujours présente. Pourtant, dans le cadre de votre quête, je suis le point de départ. « Cherchez la connaissance, même jusqu'en Chine. » (Sunan Ibn Majah, Hadith 224). Je suis discrète, mais sans moi, vous ne trouverez pas votre prochain indice. Où suis-je ?"
+                                    <span class=" flex text-center text-amber-900 font-medium"> Saisissez le code dès que vous aurez trouvé tous les indices</span></p>
+                                <div class="flex text-center flex-col">
                                     <input
                                         v-model="userResponse"
-                                        placeholder="Entrez votre réponse"
+                                        placeholder="Entrez le code"
                                         class=" mt-4 p-2 border rounded"
+                                        :disabled="isInputDisabled"
                                     />
                                     <button
                                         @click="checkAnswer"
                                         class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded"
+                                        v-show="isButtonVisible"
                                     >
                                         Vérifier
                                     </button>
                                     <div class="mt-4 ">
-                                        <p v-if="isCorrect === true" class="text-green-500">Bravo ! T'es smart Allahuma Baarik ! Mais bon c'était quand même assez facile e</p>
+                                        <p v-if="isCorrect === true" class="text-green-500">Excellent ! Tu peux être fier(e) de toi !  </p>
                                         <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essaye encore !</p>
                                     </div>
                                 </div>
 
 
-                                <div v-show="isCorrect" class="my-12 flex items-center justify-center mx-auto">
-                                    <button v-on:click="show = !show">
-                                        <p v-if="!show">Appuie pour découvrir le secret</p>
+                                <div v-show="isCorrect" class="my-12 flex flex-col items-center justify-center mx-auto">
+                                    <button v-on:click="showButton = !showButton">
+                                        <p v-if="!showButton ">Appuie pour découvrir le secret 🤫</p>
                                     </button>
                                     <transition name="bounce">
-                                        <p v-if="show" class="lg:text-3xl font-bold text-sm text-amber-500 uppercase">Je vais me marier!!!!!!</p>
+                                        <p v-if="showButton " class="lg:text-3xl font-bold text-sm text-amber-500 uppercase">🎊Je vais me marier!!!!! 🎊</p>
                                     </transition>
+
+                                        <p v-if="showButton " class=" flex flex-col  lg:text-xl font-bold text-sm mt-3 ">Attends que les autres aient fini pour réagir please 🤗</p>
+
 
                                 </div>
                             </div>
@@ -110,6 +142,9 @@ function checkAnswer() {
 
             </div>
         </div>
+        <footer class="absolute bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
+            &copy; {{ new Date().getFullYear() }}  by the WITCH 🧙🏽‍♀️| Tous droits réservés.
+        </footer>
     </div>
 </template>
 

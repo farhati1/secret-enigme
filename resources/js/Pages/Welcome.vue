@@ -68,6 +68,9 @@ function handleImageError() {
                 </main>
 
             </div>
+            <footer class="absolute bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
+                &copy; {{ new Date().getFullYear() }}  by the WITCH 🧙🏽‍♀️| Tous droits réservés.
+            </footer>
         </div>
     </div>
 </template>

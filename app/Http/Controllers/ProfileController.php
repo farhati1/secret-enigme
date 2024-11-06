@@ -25,6 +25,13 @@ class ProfileController extends Controller
             'user' => $user
         ]);
     }
+    public function demiFinal()
+    {
+        $user = Auth::user();
+        return Inertia::render('DemiFinale', [
+            'user' => $user
+        ]);
+    }
 
     public function final()
     {
