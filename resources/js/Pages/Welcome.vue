@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 defineProps({
     canLogin: {
@@ -36,6 +37,7 @@ function handleImageError() {
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
 
                 <main class="mt-6">
+
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
 
 
@@ -43,6 +45,7 @@ function handleImageError() {
                             class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800"
                         >
                             <div class="pt-3 sm:pt-5">
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
                                 <h2
                                     class="text-xl font-semibold text-black dark:text-white text-center"
                                 >

@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 
 
@@ -53,7 +54,7 @@ function checkAnswer() {
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Enigme finale" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
 
         <div
@@ -69,7 +70,7 @@ function checkAnswer() {
                             class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800"
                         >
                             <div v-if="!show" class="pt-3 sm:pt-5">
-
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
                                 <h2
                                     class="text-xl font-semibold text-black dark:text-white text-center"
                                 >
@@ -78,7 +79,7 @@ function checkAnswer() {
                                 </h2>
 
                                 <p  class="mt-4 text-sm/relaxed">
-                                    Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez quatre chiffres pour former un code. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère ...
+                                    Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez les quatres nombres pour former un code à 3 chiffres. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère ...
                                 </p>
 
                                 <div  class="my-12 flex items-center justify-center mx-auto">
@@ -92,7 +93,7 @@ function checkAnswer() {
                                 </div>
                             </div>
                             <div v-if="show" class="pt-3 sm:pt-5">
-
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
                                 <h2
                                     class="text-xl font-semibold text-black dark:text-white text-center"
                                 >
@@ -106,7 +107,7 @@ function checkAnswer() {
                                     <input
                                         v-model="userResponse"
                                         placeholder="Entrez le code"
-                                        class=" mt-4 p-2 border rounded"
+                                        class=" mt-4 p-2 border rounded dark:text-amber-700"
                                         :disabled="isInputDisabled"
                                     />
                                     <button

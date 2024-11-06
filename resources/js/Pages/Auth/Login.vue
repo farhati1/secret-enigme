@@ -23,18 +23,19 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Connexion"  link="" />
     <GuestLayout>
 
 
 
         <form @submit.prevent="submit" >
             <div>
-                <InputLabel for="name" value="Nom" />
+                <InputLabel for="name" value="Nom" class="dark:text-white"/>
 
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full  dark:text-amber-700"
                     v-model="form.name"
                     required
                     autofocus
@@ -45,12 +46,12 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="code" value="Code" />
+                <InputLabel for="code" value="Code" class="dark:text-white" />
 
                 <TextInput
                     id="code"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full dark:text-amber-700"
                     v-model="form.code"
                     required
                     autocomplete="current-password"

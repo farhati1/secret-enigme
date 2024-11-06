@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 const props = defineProps({
     canLogin: {
@@ -41,7 +42,7 @@ function checkAnswer() {
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Enigme n°1" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
         <div class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
@@ -49,20 +50,20 @@ function checkAnswer() {
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                         <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800">
                             <div class="pt-3 sm:pt-5">
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
                                 <h2 class="text-xl font-semibold text-black dark:text-white text-center">
                                     Bienvenue <span class="text-amber-500">{{ user.name }}</span>
                                 </h2>
 
                                 <p class="mt-4 text-sm/relaxed">
                                     {{ user.devinette }}
-                                    <span class="text-center text-amber-900 font-italic"> (Veuillez écrire tout en minuscule)</span>
                                 </p>
 
                                 <div class="flex flex-col">
                                     <input
                                         v-model="userResponse"
                                         placeholder="Entrez votre réponse"
-                                        class="mt-4 p-2 border text-black rounded"
+                                        class="mt-4 p-2 border dark:text-amber-700 rounded"
                                         :disabled="isInputDisabled"
                                     />
 
