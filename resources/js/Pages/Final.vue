@@ -1,54 +1,53 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
+// Données pour les étapes
+const steps = [
+    {
+        title: "Indice <span class='text-amber-500'>n°1</span>",
+        description: `Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez les quatre nombres pour former un <span class="text-amber-700 text-sm font-bold">code à 3 chiffres</span>. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère...`,
+        buttonText: "Suivant",
+    },
+    {
+        title: "À vous de jouer ! 🕵🏾‍♂️",
+        description: `Je suis souvent là quand vous êtes assis pour apprendre, parfois ignorée mais toujours présente. Pourtant, dans le cadre de votre quête, je suis le point de départ. « Cherchez la connaissance, même jusqu'en Chine. » (Sunan Ibn Majah, Hadith 224). Où suis-je ?`,
+        hint: `Saisissez le code dès que vous aurez trouvé tous les indices`,
+        buttonText: "Vérifier",
+    },
+    {
+        title: "Félicitations !",
+        description: `le logo AF... Ces deux lettres ont une signification bien plus profonde que vous ne le pensez. Chaque détail compte ...`,
+        message: `🎊 Je vais me marier!!!!! 🎊`,
+        finalHint: `Attends que les autres aient fini pour réagir please 🤗`,
+        buttonText: null,
+    },
+];
 
-
-const props = defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-    user: {
-        type: Object,
-        required: true,
-    },
-});
-
-const show = ref(false);
-const showButton = ref(false);
+const currentStep = ref(0);
 const userResponse = ref(''); // Réponse de l'utilisateur
 const isCorrect = ref(null); // Pour vérifier si la réponse est correcte
 const isInputDisabled = ref(false);
 const isButtonVisible = ref(true);
+const showFinalMessage = ref(false); // Pour révéler le message final
 
-
-function handleImageError() {
-    document.getElementById('screenshot-container')?.classList.add('!hidden');
-    document.getElementById('docs-card')?.classList.add('!row-span-1');
-    document.getElementById('docs-card-content')?.classList.add('!flex-row');
-    document.getElementById('background')?.classList.add('!hidden');
-}
-
+// Fonction de vérification de la réponse
 function checkAnswer() {
-    if (userResponse.value === '440') {
-        isCorrect.value = true; // Réponse correcte
+    if (userResponse.value === '440') { // Code correct est '440'
+        isCorrect.value = true;
         isInputDisabled.value = true;
         isButtonVisible.value = false;
+        currentStep.value++; // Passe automatiquement à l'étape 3 en cas de bonne réponse
     } else {
-        isCorrect.value = false; // Réponse incorrecte
+        isCorrect.value = false;
+    }
+}
+
+// Fonction pour passer à l'étape suivante
+function nextStep() {
+    if (currentStep.value < steps.length - 1) {
+        currentStep.value++;
     }
 }
 </script>
@@ -56,95 +55,75 @@ function checkAnswer() {
 <template>
     <Head title="Enigme finale" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-
-        <div
-            class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
-        >
+        <div class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                        <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800">
 
-
-                        <div
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800"
-                        >
-                            <div v-if="!show" class="pt-3 sm:pt-5">
-                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
-                                <h2
-                                    class="text-xl font-semibold text-black dark:text-white text-center"
-                                >
-                                    Dernier indice <span class="text-amber-500">{{user.name}}</span>, vas tu trouver la réponse à cette devinette ?
-
+                            <!-- Étape 1 : Affichage de l'indice -->
+                            <div v-if="currentStep === 0" class="pt-3 sm:pt-5">
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto" />
+                                <h2 v-html="steps[currentStep].title" class="lg:text-3xl text-xl font-semibold text-black dark:text-white text-center">
                                 </h2>
-
-                                <p  class="mt-4 text-sm/relaxed">
-                                    Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez les quatres nombres pour former un code à 3 chiffres. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère ...
-                                </p>
-
-                                <div  class="my-12 flex items-center justify-center mx-auto">
-                                    <button
-                                        v-on:click="show = !show"
-                                        class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded"
-                                    >
-                                       Suivant
+                                <p class="mt-4 text-sm/relaxed" v-html="steps[currentStep].description"></p>
+                                <div class="my-4 flex items-center justify-center mx-auto">
+                                    <button @click="nextStep" class="mt-4 flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded">
+                                        {{ steps[currentStep].buttonText }}
                                     </button>
-
                                 </div>
                             </div>
-                            <div v-if="show" class="pt-3 sm:pt-5">
-                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto " />
-                                <h2
-                                    class="text-xl font-semibold text-black dark:text-white text-center"
-                                >
-                                    À  vous de jouer ! 🕵🏾‍♂️
-                                </h2>
 
-                                <p  class="mt-4 text-sm/relaxed">
-                                    Je suis souvent là quand vous êtes assis pour apprendre, parfois ignorée mais toujours présente. Pourtant, dans le cadre de votre quête, je suis le point de départ. « Cherchez la connaissance, même jusqu'en Chine. » (Sunan Ibn Majah, Hadith 224). Je suis discrète, mais sans moi, vous ne trouverez pas votre prochain indice. Où suis-je ?"
-                                    <span class=" flex text-center text-amber-900 font-medium"> Saisissez le code dès que vous aurez trouvé tous les indices</span></p>
+                            <!-- Étape 2 : Saisir le code -->
+                            <div v-else-if="currentStep === 1" class="pt-3 sm:pt-5">
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto" />
+                                <h2 class="text-xl font-semibold text-black dark:text-white text-center">
+                                    {{ steps[currentStep].title }}
+                                </h2>
+                                <p class="mt-4 text-sm/relaxed" v-html="steps[currentStep].description"></p>
+                                <span class="flex text-center text-amber-800 font-medium">{{ steps[currentStep].hint }}</span>
                                 <div class="flex text-center flex-col">
-                                    <input
-                                        v-model="userResponse"
-                                        placeholder="Entrez le code"
-                                        class=" mt-4 p-2 border rounded dark:text-amber-700"
-                                        :disabled="isInputDisabled"
-                                    />
-                                    <button
-                                        @click="checkAnswer"
-                                        class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded"
-                                        v-show="isButtonVisible"
-                                    >
-                                        Vérifier
+                                    <input v-model="userResponse" placeholder="Entrez le code" class="mt-4 p-2 border rounded dark:text-amber-700" :disabled="isInputDisabled" />
+                                    <button @click="checkAnswer" class="mt-4 flex justify-center mx-auto w-1/4 hover:bg-amber-700 bg-amber-500 text-white p-2 rounded" v-show="isButtonVisible">
+                                        {{ steps[currentStep].buttonText }}
                                     </button>
-                                    <div class="mt-4 ">
-                                        <p v-if="isCorrect === true" class="text-green-500">Excellent ! Tu peux être fier(e) de toi !  </p>
+                                    <div class="mt-4">
+                                        <p v-if="isCorrect === true" class="text-green-500">Excellent ! Tu peux être fier(e) de toi !</p>
                                         <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essaye encore !</p>
                                     </div>
                                 </div>
-
-
-                                <div v-show="isCorrect" class="my-12 flex flex-col items-center justify-center mx-auto">
-                                    <button v-on:click="showButton = !showButton">
-                                        <p v-if="!showButton ">Appuie pour découvrir le secret 🤫</p>
-                                    </button>
-                                    <transition name="bounce">
-                                        <p v-if="showButton " class="lg:text-3xl font-bold text-sm text-amber-500 uppercase">🎊Je vais me marier!!!!! 🎊</p>
-                                    </transition>
-
-                                        <p v-if="showButton " class=" flex flex-col  lg:text-xl font-bold text-sm mt-3 ">Attends que les autres aient fini pour réagir please 🤗</p>
-
-
-                                </div>
                             </div>
+
+                            <!-- Étape 3 : Message final mystérieux -->
+                            <div v-else-if="currentStep === 2" class="pt-3 sm:pt-5">
+                                <ApplicationLogo class="h-40 w-40 fill-current mx-auto" />
+                                <h2 class="lg:text-3xl text-xl font-semibold text-black dark:text-white text-center">
+                                    {{ steps[currentStep].title }}
+                                </h2>
+                                <p class="mt-4 text-sm/relaxed" v-html="steps[currentStep].description"></p>
+                                <p class="mb-4 text-sm/relaxed">Ce quiz sur le fiqh du mariage n'était qu'un prélude, une initiation secrète à un chapitre bien plus grand.</p>
+                                <transition name="bounce">
+                                    <p v-if="!showFinalMessage" class="mt-4 text-center text-amber-500 font-bold cursor-pointer" @click="showFinalMessage = true">
+                                        Appuie pour découvrir le secret 🤫
+                                    </p>
+                                </transition>
+                                <transition name="bounce">
+                                    <p v-if="showFinalMessage" class="lg:text-3xl mt-8  font-bold text-center text-sm text-amber-500 uppercase">
+                                        {{ steps[currentStep].message }}
+                                    </p>
+                                </transition>
+                                <p v-if="showFinalMessage" class="flex flex-col  text-center lg:text-xl font-bold text-sm mt-3">
+                                    {{ steps[currentStep].finalHint }}
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                 </main>
-
             </div>
         </div>
-        <footer class="absolute bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
-            &copy; {{ new Date().getFullYear() }}  by the WITCH 🧙🏽‍♀️| Tous droits réservés.
+        <footer class="lg:absolute relative bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
+            &copy; {{ new Date().getFullYear() }} by the WITCH 🧙🏽‍♀️| Tous droits réservés.
         </footer>
     </div>
 </template>

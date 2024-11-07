@@ -90,7 +90,7 @@ function checkAnswer() {
                                     <button
                                         @click="checkAnswer"
                                         v-show="isButtonVisible"
-                                        class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-700 text-white p-2 rounded"
+                                        class="mt-4  flex justify-center mx-auto w-1/4 bg-amber-500  hover:bg-amber-700 text-white p-2 rounded"
                                     >
                                         Vérifier
                                     </button>
@@ -113,7 +113,7 @@ function checkAnswer() {
 
             </div>
         </div>
-        <footer class="absolute bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
+        <footer class="lg:absolute relative bottom-0 w-full text-center font-bold lg:text-lg text-sm text-gray-400 py-4 dark:text-white">
             &copy; {{ new Date().getFullYear() }}  by the WITCH 🧙🏽‍♀️| Tous droits réservés.
         </footer>
     </div>

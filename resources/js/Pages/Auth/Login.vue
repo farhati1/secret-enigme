@@ -23,7 +23,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Connexion"  link="" />
+    <Head title="Connexion"  />
     <GuestLayout>
 
 
