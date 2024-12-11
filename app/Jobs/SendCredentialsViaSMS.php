@@ -21,10 +21,6 @@ class SendCredentialsViaSMS implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * Execute the job.
@@ -45,13 +41,12 @@ class SendCredentialsViaSMS implements ShouldQueue
         if (!$user) {
             return;
         }
-
         // Composer le message
-        $message = "Bonjour {$user->name}, \n";
-        $message .= "Vos identifiants sont : \n";
-        $message .= "ID: {$user->name} \n";
+        $message = "As salaam anleykoum, {$user->name}, \n";
+        $message .= "Tes identifiants sont : \n";
+        $message .= "Nom: {$user->name} \n";
         $message .= "Code: {$user->code} \n";
-        $message .= "Veuillez vous connecter à : https://example.com/login";
+        $message .= "Veuillez vous connecter sur: https://enigme-app-tb4jj.ondigitalocean.app/";
 
 
         // Créer une instance du client Twilio

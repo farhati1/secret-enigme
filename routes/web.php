@@ -15,7 +15,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/send', [SendSMSController::class, 'sendSMS()']) -> name('send.sms');
+Route::get('/send', [SendSMSController::class, 'sendSMS']) -> name('send.sms');
 
 
 Route::middleware('auth')->group(function () {
