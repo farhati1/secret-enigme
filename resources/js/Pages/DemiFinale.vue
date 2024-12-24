@@ -77,7 +77,7 @@ function checkAnswer() {
                                 </h2>
 
                                 <p  class="mt-4 text-sm/relaxed">
-                                    Félicitations ! Vous avez déchiffré chaque prénom et chaque indice. Mon nom porte en lui un immense bonheur. Qui suis-je ?
+                                    Félicitations ! Vous avez déchiffré le prénom. Allez un dernier !! Mon nom porte en lui un immense bonheur. Qui suis-je ?
 
                                 </p>
                                 <div class="flex flex-col">

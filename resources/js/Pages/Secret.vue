@@ -40,7 +40,6 @@ function checkAnswer() {
     }
 }
 </script>
-
 <template>
     <Head title="Enigme n°1" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">

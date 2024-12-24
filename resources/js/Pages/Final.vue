@@ -6,12 +6,12 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 // Données pour les étapes
 const steps = [
     {
-        title: "Indice <span class='text-amber-500'>n°1</span>",
+        title: "À vous de jouer ! 🕵🏾‍♂️",
         description: `Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez les quatre nombres pour former un <span class="text-amber-700 text-sm font-bold">code à 3 chiffres</span>. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère...`,
         buttonText: "Suivant",
     },
     {
-        title: "À vous de jouer ! 🕵🏾‍♂️",
+        title: "Indice <span class='text-amber-500'>n°1</span>",
         description: `Je suis souvent là quand vous êtes assis pour apprendre, parfois ignorée mais toujours présente. Pourtant, dans le cadre de votre quête, je suis le point de départ. « Cherchez la connaissance, même jusqu'en Chine. » (Sunan Ibn Majah, Hadith 224). Où suis-je ?`,
         hint: `Saisissez le code dès que vous aurez trouvé tous les indices`,
         buttonText: "Vérifier",
