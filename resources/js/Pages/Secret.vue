@@ -77,7 +77,7 @@ function checkAnswer() {
 
                                     <div class="mt-4 ">
                                         <p v-if="isCorrect === true" class="text-green-500">Bravo ! C'est correct !</p>
-                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essayez encore !</p>
+                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essayez encore ! Si tu es sûr(e) de ta réponse envoie moi un message pour l'écriture exacte du prénom</p>
                                     </div>
                                 </div>
 

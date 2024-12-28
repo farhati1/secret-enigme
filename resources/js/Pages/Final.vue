@@ -7,11 +7,11 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 const steps = [
     {
         title: "À vous de jouer ! 🕵🏾‍♂️",
-        description: `Le code est dissimulé tout autour de vous, caché dans les recoins familiers du <span class="text-amber-700 text-sm font-bold">Centre Malezi</span>. Explorez chaque indice laissé et suivez chaque piste. Rassemblez les quatre nombres pour former un <span class="text-amber-700 text-sm font-bold">code à 3 chiffres</span>. Vous trouverez le secret au bout de cette quête... si vous parvenez à percer le mystère...`,
+        description: `Le code est la fusion des résultats des devinettes envoyés sur Whatsapp. Trouvez-le pour débloquer le message final.`,
         buttonText: "Suivant",
     },
     {
-        title: "Indice <span class='text-amber-500'>n°1</span>",
+        title: 'Indice <span class="text-amber-500">n°1</span>',
         description: `Je suis souvent là quand vous êtes assis pour apprendre, parfois ignorée mais toujours présente. Pourtant, dans le cadre de votre quête, je suis le point de départ. « Cherchez la connaissance, même jusqu'en Chine. » (Sunan Ibn Majah, Hadith 224). Où suis-je ?`,
         hint: `Saisissez le code dès que vous aurez trouvé tous les indices`,
         buttonText: "Vérifier",
@@ -19,8 +19,8 @@ const steps = [
     {
         title: "Félicitations !",
         description: `le logo AF... Ces deux lettres ont une signification bien plus profonde que vous ne le pensez. Chaque détail compte ...`,
-        message: `🎊 Je vais me marier!!!!! 🎊`,
-        finalHint: `Attends que les autres aient fini pour réagir please 🤗`,
+        message: `🎊 Je vais me marier même si tu le savais déjà!!!!! 🎊`,
+        finalHint: `Merci de l'avoir quand même fait. Please  pas un mot aux foundis, leur tours viendra après bi idniLlah par mon père et non moi 🤗`,
         buttonText: null,
     },
 ];
@@ -89,7 +89,7 @@ function nextStep() {
                                     </button>
                                     <div class="mt-4">
                                         <p v-if="isCorrect === true" class="text-green-500">Excellent ! Tu peux être fier(e) de toi !</p>
-                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Essaye encore !</p>
+                                        <p v-if="isCorrect === false" class="text-red-500">Dommage, ce n'est pas ça. Je sens que tu y es presque réfléchis bien sur la troisièeme devinette n°3!</p>
                                     </div>
                                 </div>
                             </div>
