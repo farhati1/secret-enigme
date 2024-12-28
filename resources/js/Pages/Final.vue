@@ -20,7 +20,7 @@ const steps = [
         title: "Félicitations !",
         description: `le logo AF... Ces deux lettres ont une signification bien plus profonde que vous ne le pensez. Chaque détail compte ...`,
         message: `🎊 Je vais me marier même si tu le savais déjà!!!!! 🎊`,
-        finalHint: `Merci de l'avoir quand même fait. Please  pas un mot aux foundis, leur tours viendra après bi idniLlah par mon père et non moi 🤗`,
+        finalHint: `Merci de l'avoir quand même fait. Please  pas un mot aux foundis, leur tours viendra après bi idniLlah par mon père et non par moi 🤗`,
         buttonText: null,
     },
 ];
@@ -50,6 +50,8 @@ function nextStep() {
         currentStep.value++;
     }
 }
+
+const currentStepTitle = computed(() => steps[currentStep.value].title);
 </script>
 
 <template>
@@ -77,8 +79,7 @@ function nextStep() {
                             <!-- Étape 2 : Saisir le code -->
                             <div v-else-if="currentStep === 1" class="pt-3 sm:pt-5">
                                 <ApplicationLogo class="h-40 w-40 fill-current mx-auto" />
-                                <h2 class="text-xl font-semibold text-black dark:text-white text-center">
-                                    {{ steps[currentStep].title }}
+                                <h2  v-html="steps[currentStep].title" class="text-xl font-semibold text-black dark:text-white text-center">
                                 </h2>
                                 <p class="mt-4 text-sm/relaxed" v-html="steps[currentStep].description"></p>
                                 <span class="flex text-center text-amber-800 font-medium">{{ steps[currentStep].hint }}</span>
