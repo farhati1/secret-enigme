@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 // Données pour les étapes
